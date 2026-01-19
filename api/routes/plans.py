@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from models import db, Plan, Challenge, PayPalSettings
+from api.models import db, Plan, Challenge, PayPalSettings
 
 plans_bp = Blueprint('plans', __name__)
 

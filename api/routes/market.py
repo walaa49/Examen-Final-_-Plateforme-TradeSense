@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
-from services.market import get_quote, get_series
-from services.morocco_scraper import get_morocco_quote
-from services.calendar_service import get_economic_calendar
+from api.services.market import get_quote, get_series
+from api.services.morocco_scraper import get_morocco_quote
+from api.services.calendar_service import get_economic_calendar
 
 market_bp = Blueprint('market', __name__)
 

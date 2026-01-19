@@ -8,7 +8,7 @@ Business Rules:
 """
 
 from datetime import datetime
-from models import db, Challenge, DailyMetrics
+from api.models import db, Challenge, DailyMetrics
 
 def evaluate_challenge_rules(challenge):
     """
@@ -80,7 +80,7 @@ def check_daily_loss(challenge):
     Calculate the current day's PnL percentage.
     Uses daily_metrics table or calculates from trades.
     """
-    from models import Trade
+    from api.models import Trade
     from datetime import date
     
     today = date.today()

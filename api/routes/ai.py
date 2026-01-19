@@ -1,9 +1,9 @@
 from flask import Blueprint, request, jsonify
 from datetime import datetime
 from flask_jwt_extended import jwt_required
-from services.ai_advisor import get_ai_analysis, get_ai_chat_response
-from services.market import get_quote
-from services.morocco_scraper import get_morocco_quote
+from api.services.ai_advisor import get_ai_analysis, get_ai_chat_response
+from api.services.market import get_quote
+from api.services.morocco_scraper import get_morocco_quote
 
 ai_bp = Blueprint('ai', __name__)
 

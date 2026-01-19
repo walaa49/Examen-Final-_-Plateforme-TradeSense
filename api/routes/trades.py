@@ -1,9 +1,9 @@
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity, get_jwt
-from models import db, Trade, Challenge
-from services.market import get_quote
-from services.morocco_scraper import get_morocco_quote
-from services.rules import evaluate_challenge_rules
+from api.models import db, Trade, Challenge
+from api.services.market import get_quote
+from api.services.morocco_scraper import get_morocco_quote
+from api.services.rules import evaluate_challenge_rules
 import random
 
 trades_bp = Blueprint('trades', __name__)

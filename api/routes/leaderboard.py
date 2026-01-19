@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify
-from models import db, Challenge, User
+from api.models import db, Challenge, User
 from sqlalchemy import func, extract
 from datetime import datetime
 

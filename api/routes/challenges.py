@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity, get_jwt
-from models import Challenge
+from api.models import Challenge
 
 challenges_bp = Blueprint('challenges', __name__)
 
