@@ -19,9 +19,13 @@ class DevelopmentConfig(Config):
 class ProductionConfig(Config):
     """Production configuration."""
     DEBUG = False
-    SQLALCHEMY_DATABASE_URI = os.getenv('POSTGRES_URL') or os.getenv('DATABASE_URL')
-    if SQLALCHEMY_DATABASE_URI and SQLALCHEMY_DATABASE_URI.startswith("postgres://"):
-        SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace("postgres://", "postgresql://", 1)
+    
+    @property
+    def SQLALCHEMY_DATABASE_URI(self):
+        uri = os.getenv('POSTGRES_URL') or os.getenv('DATABASE_URL')
+        if uri and uri.startswith("postgres://"):
+            uri = uri.replace("postgres://", "postgresql://", 1)
+        return uri
 
 config = {
     'development': DevelopmentConfig,
