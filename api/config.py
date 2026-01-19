@@ -25,7 +25,8 @@ class ProductionConfig(Config):
         uri = os.getenv('POSTGRES_URL') or os.getenv('DATABASE_URL')
         if uri and uri.startswith("postgres://"):
             uri = uri.replace("postgres://", "postgresql://", 1)
-        return uri
+        # Fallback to ephemeral sqlite if no DB configured (avoids build crash)
+        return uri or 'sqlite:///:memory:'
 
 config = {
     'development': DevelopmentConfig,

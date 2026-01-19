@@ -39,6 +39,14 @@ def create_app(config_name=None):
 # Initialize the application
 app = create_app()
 
+# Safely attempt to create tables (Auto-Migration style)
+with app.app_context():
+    try:
+        db.create_all()
+        print(">>> Database tables created (or already exist).")
+    except Exception as e:
+        print(f">>> WARNING: Database connection failed or not configured. App running in 'No-DB' mode. Error: {e}")
+
 # Expose 'app' for Vercel WSGI
 application = app
 
