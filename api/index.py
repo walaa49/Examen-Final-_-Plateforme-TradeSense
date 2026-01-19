@@ -2,6 +2,7 @@ import os
 from flask import Flask
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
+from datetime import datetime
 
 from config import config
 from models import db
@@ -60,7 +61,22 @@ def create_app(config_name=None):
     
     return app
 
-app = create_app()
 
-if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+# --- VERCEL CRON JOB ---
+@app.route('/api/cron-tick')
+def cron_tick():
+    """
+    Called by Vercel Cron every minute.
+    Simulates the 'while True' loop step.
+    """
+    # Import your trading logic here to avoid circular imports
+    # from bot_api import main_enhanced_trading_loop_step
+    # main_enhanced_trading_loop_step() 
+    return {"status": "Cron executed", "timestamp": str(datetime.now())}
+
+# Expose 'app' for Vercel WSGI
+application = app
+
+# if __name__ == '__main__':
+#     app.run(debug=True, port=5000)
+
