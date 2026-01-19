@@ -14,14 +14,11 @@ class Config:
 class DevelopmentConfig(Config):
     """Development configuration."""
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = os.getenv(
-        'DATABASE_URL', 
-        'sqlite:///tradesense.db'
-    )
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'sqlite:///tradesense.db')
 
+class ProductionConfig(Config):
     """Production configuration."""
     DEBUG = False
-    # Vercel/Supabase/Neon usually provide POSTGRES_URL or DATABASE_URL
     SQLALCHEMY_DATABASE_URI = os.getenv('POSTGRES_URL') or os.getenv('DATABASE_URL')
     if SQLALCHEMY_DATABASE_URI and SQLALCHEMY_DATABASE_URI.startswith("postgres://"):
         SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace("postgres://", "postgresql://", 1)
