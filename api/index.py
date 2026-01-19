@@ -4,8 +4,8 @@ from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 from datetime import datetime
 
-from config import config
-from models import db
+from api.config import config
+from api.models import db
 
 def create_app(config_name=None):
     """Application factory."""
@@ -32,13 +32,13 @@ def create_app(config_name=None):
     JWTManager(app)
     
     # Register blueprints
-    from routes.auth import auth_bp
-    from routes.plans import plans_bp
-    from routes.challenges import challenges_bp
-    from routes.market import market_bp
-    from routes.trades import trades_bp
-    from routes.leaderboard import leaderboard_bp
-    from routes.admin import admin_bp
+    from api.routes.auth import auth_bp
+    from api.routes.plans import plans_bp
+    from api.routes.challenges import challenges_bp
+    from api.routes.market import market_bp
+    from api.routes.trades import trades_bp
+    from api.routes.leaderboard import leaderboard_bp
+    from api.routes.admin import admin_bp
     
     app.register_blueprint(auth_bp, url_prefix='/api/auth')
     app.register_blueprint(plans_bp, url_prefix='/api')
@@ -48,7 +48,7 @@ def create_app(config_name=None):
     app.register_blueprint(leaderboard_bp, url_prefix='/api/leaderboard')
     app.register_blueprint(admin_bp, url_prefix='/api/admin')
     
-    from routes.ai import ai_bp
+    from api.routes.ai import ai_bp
     app.register_blueprint(ai_bp, url_prefix='/api/ai')
     
     # Create tables
@@ -61,22 +61,16 @@ def create_app(config_name=None):
     
     return app
 
-
 # --- VERCEL CRON JOB ---
 @app.route('/api/cron-tick')
 def cron_tick():
-    """
-    Called by Vercel Cron every minute.
-    Simulates the 'while True' loop step.
-    """
-    # Import your trading logic here to avoid circular imports
-    # from bot_api import main_enhanced_trading_loop_step
-    # main_enhanced_trading_loop_step() 
     return {"status": "Cron executed", "timestamp": str(datetime.now())}
+
+app = create_app()
 
 # Expose 'app' for Vercel WSGI
 application = app
 
-# if __name__ == '__main__':
-#     app.run(debug=True, port=5000)
+if __name__ == '__main__':
+    app.run(debug=True, port=5000)
 
