@@ -3,6 +3,22 @@
         {
             "source": "/api/(.*)",
             "destination": "/api/index.py"
+        },
+        {
+            "source": "/assets/(.*)",
+            "destination": "/assets/$1"
+        },
+        {
+            "source": "/(.*\\.ico)",
+            "destination": "/$1"
+        },
+        {
+            "source": "/(.*\\.png)",
+            "destination": "/$1"
+        },
+        {
+            "source": "/((?!api/|assets/).*)",
+            "destination": "/index.html"
         }
     ]
 }
