@@ -4,10 +4,6 @@ flask-sqlalchemy
 flask-jwt-extended
 psycopg2-binary
 yfinance
-pandas
-scikit-learn
-numpy
-gunicorn
 python-dotenv
 werkzeug
 beautifulsoup4
